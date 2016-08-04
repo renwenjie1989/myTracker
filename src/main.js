@@ -11,9 +11,11 @@ import Notice from './components/Notice'
 
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueFilter from 'vue-filter'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(VueFilter)
 
 const router = new VueRouter()
 

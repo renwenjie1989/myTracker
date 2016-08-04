@@ -41,7 +41,8 @@ export default {
 </script>
 
 <style scoped>
-	div {
-		display: block;
+	body {
+		font-size: 16px;
+		background-color: blue;
 	}
 </style>
