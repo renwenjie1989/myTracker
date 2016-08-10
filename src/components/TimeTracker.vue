@@ -2,8 +2,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Time Track</div>
 		<div class="panel-body">
-			<button @click="doTheTime()" v-if="!punchStarted" class="btn btn-large btn-success">Start</button>
-			<button @click="saveTime" v-else class="btn btn-large btn-danger">Stop</button>
+			<button @click="doTheTime" v-if="!punchStarted" class="btn btn-large btn-success">Start</button>
+			<button @click="saveToTime" v-else class="btn btn-large btn-danger">Stop</button>
 			<div id="punchTimer">
 				Current time: {{ $data.timerCurrentTime | date "%I:%M:%s" }}
 				<br>
@@ -57,7 +57,7 @@ export default {
 			}
 			that.hours = parseInt( s / 3600 / 1000 ) % 24;
 			that.minutes = parseInt( s / 60 / 1000 ) % 60;
-			that.seconds = Math.floor(s / 1000);
+			that.seconds = Math.floor(s / 1000) % 60;
 
 			if(that.hours < 10) {
 				that.hours = "0" + that.hours;
@@ -72,9 +72,9 @@ export default {
 			}
 
 			if(that.seconds < 10) {
-				that.seconds = "0" + that.seconds;
+				that.seconds = "0" + that.seconds.toFixed(0);
 			} else {
-				that.seconds = that.seconds;
+				that.seconds = that.seconds.toFixed(0);
 			}
 
 		},
@@ -83,6 +83,7 @@ export default {
 		},
 		saveToTime: function() {
 			var that = this;
+			that.punchStarted = !that.punchStarted;
 		}
 	}
 
