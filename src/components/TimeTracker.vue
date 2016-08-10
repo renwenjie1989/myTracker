@@ -1,19 +1,19 @@
 <template>
 	<div class="panel panel-default">
-		<div class="panel-heading">Punch In/Out</div>
+		<div class="panel-heading">Time Track</div>
 		<div class="panel-body">
-			<button @click="doTheTime()" v-if="!punchStarted" class="btn btn-large btn-success">Punch In</button>
-			<button @click="doTheTime()" v-else class="btn btn-large btn-success">Punch Out</button>
+			<button @click="doTheTime()" v-if="!punchStarted" class="btn btn-large btn-success">Start</button>
+			<button @click="saveTime" v-else class="btn btn-large btn-danger">Stop</button>
 			<div id="punchTimer">
-				Current time: {{ $data.timerCurrentTimer | date "%I:%M:%s" }}
+				Current time: {{ $data.timerCurrentTime | date "%I:%M:%s" }}
 				<br>
-				{{ $data.timerCurrentTimer }}
+				{{ $data.timerCurrentTime }}
 				<br><br>
 				Start time: {{ $data.timerStartedAt | date "%I:%M:%s" }}
 				<br>
 				{{ $data.timerStartedAt  }}
 				<br><br>
-				Punch time: {{ $data.timerPunch }}
+				Punch time: 
 				<br>
 				{{ hours }}:{{ minutes }}:{{ seconds }}
 			</div>
@@ -27,8 +27,7 @@ export default {
 	data () {
 		return {
 			timerStartedAt: Date.now(),
-			timerCurrentTimer: Date.now(),
-			timerPunch: 0,
+			timerCurrentTime: Date.now(),
 			hours: "00",
 			minutes: "00",
 			seconds: "00",
@@ -39,23 +38,26 @@ export default {
 		doTheTime: function (){
 			var that = this;
 			that.punchStarted = !that.punchStarted;
+			that.timerStartedAt = Date.now();
+			that.saveFromTime();
 			setInterval(function() {
-				that.runTime();
+				that.timerCurrentTime = Date.now();
+				that.runTime(that.timerStartedAt, that.timerCurrentTime);
 			},1000)
 		},
-		runTime: function () {
+		runTime: function (fromDate, toDate) {
 			var that = this;
-			that.timerPunch += 1;
-			that.niceTime(that.timerPunch);
+			var diff = toDate - fromDate;
+			that.niceTime(diff);
 		},
 		niceTime: function(s) {
 			var that = this;
 			if(!s) {
 				s = 0;
 			}
-			that.hours = parseInt( s / 3600 ) % 24;
-			that.minutes = parseInt( s / 60 ) % 60;
-			that.seconds = s % 60;
+			that.hours = parseInt( s / 3600 / 1000 ) % 24;
+			that.minutes = parseInt( s / 60 / 1000 ) % 60;
+			that.seconds = Math.floor(s / 1000);
 
 			if(that.hours < 10) {
 				that.hours = "0" + that.hours;
@@ -76,9 +78,11 @@ export default {
 			}
 
 		},
-		saveTime: function() {
+		saveFromTime: function() {
 			var that = this;
-			
+		},
+		saveToTime: function() {
+			var that = this;
 		}
 	}
 

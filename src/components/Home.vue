@@ -9,6 +9,7 @@
 
 		<div class="col-sm-6">
 			<punch-panel></punch-panel>
+			<time-tracker></time-tracker>
 		</div>
 
 		<div class="col-sm-6">
@@ -23,12 +24,14 @@
 
 <script>
 import PunchPanel from './PunchPanel'
+import TimeTracker from './TimeTracker'
 import Activity from './Activity'
 import Notice from './Notice'
 
 export default {
 	components: {
 		'punch-panel': PunchPanel,
+		'time-tracker': TimeTracker,
 		'activity': Activity,
 		'notice': Notice
 	},

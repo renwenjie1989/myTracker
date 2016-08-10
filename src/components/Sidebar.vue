@@ -11,14 +11,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">User</div>
 					<ul class="list-group">
-						<li class="list-group-item"><a v-link="'/create-user'">Create User</a></li>
+						<li class="list-group-item"><a v-link="#">Create User</a></li>
 						<li class="list-group-item"><a v-link="'/all-user'">All User</a></li>
 					</ul>
 				</div>
 
 				<div class="panel panel-default">
 					<div class="panel-heading">Setting</div>
-					<div class="panel-body"><a href="#">Change Password</a></div>
+					<div class="panel-body"><a v-link="'/change-password'">Change Password</a></div>
 				</div>
 
 			</div>
