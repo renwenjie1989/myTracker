@@ -1,29 +1,25 @@
 <template>
-	<div class="panel panel-default">
-		<div class="panel-heading">Time Track</div>
-		<div class="panel-body">
-			<button @click="runTimer" class="btn btn-large btn-success">Run Timer</button>
-			<button @click="doTheTime" v-if="!punchStarted" class="btn btn-large btn-success">Start</button>
-			<button @click="saveToTime" v-else class="btn btn-large btn-danger">Stop</button>
-			<div id="punchTimer">
-				Current time: {{ $data.timerCurrentTime | date "%I:%M:%s" }}
-				<br>
-				{{ $data.timerCurrentTime }}
-				<br><br>
-				Start time: {{ $data.timerStartedAt | date "%I:%M:%s" }}
-				<br>
-				{{ $data.timerStartedAt  }}
-				<br><br>
-				Punch time: 
-				<br>
-				{{ hours }}:{{ minutes }}:{{ seconds }}
-			</div>
-		</div>
-	</div>
+	<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Time Tracker</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">User</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+    	  <li><a href="#"><span class="glyphicon glyphicon-time"></span> 00:00:00</a></li>
+    	  <li v-show="!timerValue.timerStarted"><a href="#"><span class="glyphicon glyphicon-time"></span> {{ hours }}:{{ minutes }}:{{ seconds }}</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </nav>
 </template>
 
 <script>
-import { runTimer } from '../vuex/actions'
+import { getCount } from '../vuex/getters'
 
 export default {
 	el: '#punchTimer',
@@ -34,7 +30,6 @@ export default {
 			hours: "00",
 			minutes: "00",
 			seconds: "00",
-			punchStarted: false
 		}
 	},
 	methods: {
@@ -90,10 +85,9 @@ export default {
 		}
 	},
 	vuex: {
-		actions: {
-			runTimer: runTimer
+		getters: {
+			timerValue: getCount
 		}
 	}
-
 }
 </script>

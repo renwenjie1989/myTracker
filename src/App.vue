@@ -1,19 +1,5 @@
 <template>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a href="#" class="navbar-brand">Time Tracker</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">User</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
-    </nav>
+    <menu></menu>
 
     <div class="container">
       <div class="col-sm-3 col-lg-3">
@@ -27,11 +13,16 @@
 
 <script>
 import Sidebar from './components/Sidebar'
+import Menu from './components/Menu'
+
+import store from './vuex/store'
 
 export default {
   components: {
-    'sidebar': Sidebar
-  }
+    'sidebar': Sidebar,
+    'menu': Menu
+  },
+  store: store
 }
 </script>
 

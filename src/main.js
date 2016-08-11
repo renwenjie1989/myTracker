@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import Sidebar from './components/Sidebar'
+import Menu from './components/Menu'
 import Home from './components/Home'
 import CreateUser from './components/CreateUser'
 import AllUser from './components/AllUser'
@@ -10,6 +11,7 @@ import TimeTracker from './components/TimeTracker'
 import Activity from './components/Activity'
 import Notice from './components/Notice'
 
+import store from './vuex/store'
 
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
